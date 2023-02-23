@@ -7,31 +7,20 @@
 
 import Foundation
 
-protocol Loader {
-    
-    associatedtype DataType: Decodable
-    func load(url: URL) async -> DataType?
-}
 
-
-struct DataLoader<DataType: Decodable>: Loader {
+struct DataLoader {
     
-    func load(url: URL) async -> DataType? {
+    func get(url: URL) async -> Data? {
         let session = URLSession(configuration: .default)
         do {
             let (data, _) = try await session.data(from: url)
-            return self.parseJSON(data)
+            return data
         } catch {
             print(error)
             return nil
         }
     }
     
-    func parseJSON(_ data: Data) -> DataType? {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return try? decoder.decode(DataType.self, from: data)
-    }
-    
+
     
 }
