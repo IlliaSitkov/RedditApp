@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		950C99E629A7F7EF0011D9FE /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950C99E529A7F7EF0011D9FE /* URLBuilder.swift */; };
 		958D809029A749F200241DFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D808F29A749F200241DFB /* AppDelegate.swift */; };
 		958D809229A749F200241DFB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D809129A749F200241DFB /* SceneDelegate.swift */; };
 		958D809429A749F200241DFB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958D809329A749F200241DFB /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		950C99E529A7F7EF0011D9FE /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
 		958D808C29A749F200241DFB /* RedditApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedditApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		958D808F29A749F200241DFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		958D809129A749F200241DFB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		950C99E929A80AC00011D9FE /* services */ = {
+			isa = PBXGroup;
+			children = (
+				950C99E529A7F7EF0011D9FE /* URLBuilder.swift */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
 		958D808329A749F200241DFB = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +69,7 @@
 				958D808F29A749F200241DFB /* AppDelegate.swift */,
 				958D809129A749F200241DFB /* SceneDelegate.swift */,
 				958D809329A749F200241DFB /* ViewController.swift */,
+				950C99E929A80AC00011D9FE /* services */,
 				958D809529A749F200241DFB /* Main.storyboard */,
 				958D809829A749F800241DFB /* Assets.xcassets */,
 				958D809A29A749F800241DFB /* LaunchScreen.storyboard */,
@@ -139,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				958D809429A749F200241DFB /* ViewController.swift in Sources */,
+				950C99E629A7F7EF0011D9FE /* URLBuilder.swift in Sources */,
 				958D809029A749F200241DFB /* AppDelegate.swift in Sources */,
 				958D809229A749F200241DFB /* SceneDelegate.swift in Sources */,
 			);
