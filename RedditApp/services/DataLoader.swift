@@ -8,19 +8,39 @@
 import Foundation
 
 
-struct DataLoader {
+protocol DataLoaderDelegate {
+    func postsFetched(posts: PostResponseData)
+}
+
+
+class DataLoader {
     
-    func get(url: URL) async -> Data? {
-        let session = URLSession(configuration: .default)
-        do {
-            let (data, _) = try await session.data(from: url)
-            return data
-        } catch {
-            print(error)
-            return nil
+    private let decoder = JSONDecoder()
+    var delegate:DataLoaderDelegate?
+    
+    func performRequest(url: URL) {
+        let session  = URLSession(configuration: .default)
+        let task = session.dataTask(with: url) { data, response, error in
+            guard let data = data
+            else {
+                print("error")
+                return
+            }
+            
+            guard let delegate = self.delegate else {
+                print("error2")
+                return
+            }
+            guard let decoded = self.decoder.parseJSON(PostResponseData.self, from: data)
+            else {
+                print("error3")
+                return
+            }
+            print("Finished 0")
+            delegate.postsFetched(posts: decoded)
         }
+        task.resume()
     }
     
-
     
 }

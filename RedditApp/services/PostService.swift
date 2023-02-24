@@ -7,10 +7,25 @@
 
 import Foundation
 
-struct PostService {
-    
-    private let dataLoader = DataLoader()
+class PostService: DataLoaderDelegate {
+
+    private var dataLoader = DataLoader()
     private let decoder = JSONDecoder()
+    var delegate:DataLoaderDelegate? {
+        willSet {
+            print("Setting delegate...")
+            print(newValue)
+        }
+        didSet {
+            print("DID set")
+            print(delegate)
+        }
+    }
+    
+    init() {
+        self.dataLoader.delegate = self
+    }
+
     
     private let baseUrl = URLBuilder()
         .scheme("https")
@@ -18,12 +33,19 @@ struct PostService {
         .path("/r/ios/top.json")
     
 
-    func getPostsWithParams(subreddit: String, limit: Int, after: String = "") async {
-        guard let url = baseUrl.changePath(to: subreddit, at: 1)?.withNew(queryParams: ("limit", limit), ("after", after)).build(),
-              let data = await dataLoader.get(url: url),
-              let postResponse: PostResponseData = decoder.parseJSON(data, to: PostResponseData.self)
-        else {return nil}
-        return postResponse
+    func getPostsWithParams(subreddit: String, limit: Int, after: String = "") {
+        guard let url = baseUrl.changePath(to: subreddit, at: 1)?.withNew(queryParams: ("limit", limit), ("after", after)).build()
+        else {return}
+        print(delegate)
+        dataLoader.performRequest(url: url)
+        print(delegate)
+    }
+    
+    func postsFetched(posts: PostResponseData) {
+        print("Finished1")
+        print(delegate)
+        delegate?.postsFetched(posts: posts)
+        print(posts)
     }
     
     

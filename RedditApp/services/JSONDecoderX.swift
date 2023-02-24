@@ -10,7 +10,7 @@ import Foundation
 
 extension JSONDecoder {
     
-    func parseJSON<T:Decodable>(_ data: Data, to: T.Type) -> T? {
+    func parseJSON<T:Decodable>(_ to: T.Type, from data: Data) -> T? {
         self.keyDecodingStrategy = .convertFromSnakeCase
         return try? self.decode(to, from: data)
     }

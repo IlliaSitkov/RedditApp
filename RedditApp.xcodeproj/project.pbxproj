@@ -18,6 +18,8 @@
 		958D809729A749F200241DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958D809529A749F200241DFB /* Main.storyboard */; };
 		958D809929A749F800241DFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 958D809829A749F800241DFB /* Assets.xcassets */; };
 		958D809C29A749F800241DFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958D809A29A749F800241DFB /* LaunchScreen.storyboard */; };
+		95A0662E29A8ACB5008D2430 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 95A0662D29A8ACB5008D2430 /* SDWebImage */; };
+		95A0663029A8ACB5008D2430 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 95A0662F29A8ACB5008D2430 /* SDWebImageMapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A0663029A8ACB5008D2430 /* SDWebImageMapKit in Frameworks */,
+				95A0662E29A8ACB5008D2430 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +118,10 @@
 			dependencies = (
 			);
 			name = RedditApp;
+			packageProductDependencies = (
+				95A0662D29A8ACB5008D2430 /* SDWebImage */,
+				95A0662F29A8ACB5008D2430 /* SDWebImageMapKit */,
+			);
 			productName = RedditApp;
 			productReference = 958D808C29A749F200241DFB /* RedditApp.app */;
 			productType = "com.apple.product-type.application";
@@ -142,6 +150,9 @@
 				Base,
 			);
 			mainGroup = 958D808329A749F200241DFB;
+			packageReferences = (
+				95A0662C29A8ACB5008D2430 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 958D808D29A749F200241DFB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -394,6 +405,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		95A0662C29A8ACB5008D2430 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		95A0662D29A8ACB5008D2430 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 95A0662C29A8ACB5008D2430 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		95A0662F29A8ACB5008D2430 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 95A0662C29A8ACB5008D2430 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 958D808429A749F200241DFB /* Project object */;
 }

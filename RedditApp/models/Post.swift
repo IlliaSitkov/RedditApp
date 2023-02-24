@@ -24,13 +24,15 @@ struct Post: Decodable {
     let domain: String
     let title: String
     let preview: PreviewImages
-    let numComments: String
+    let numComments: Int
     let ups: Int
     let downs: Int
+    let created: Int
+    let saved = Bool.random()
     
     enum CodingKeys: String, CodingKey {
-        case domain,title,ups,downs,numComments,preview
-        case username = "author_fullname"
+        case domain,title,ups,downs, numComments,preview,created
+        case username = "authorFullname"
     }
 }
 struct PreviewImages: Decodable {
