@@ -8,9 +8,9 @@
 import UIKit
 import SDWebImage
 
-class ViewController: UIViewController, DataLoaderDelegate {
-
-    var service = PostService()
+class ViewController: UIViewController, PostManagerDelegate {
+    
+    var service = PostManager()
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var domainLabel: UILabel!
@@ -26,14 +26,13 @@ class ViewController: UIViewController, DataLoaderDelegate {
         // Do any additional setup after loading the view.
         service.delegate = self
         service.getPostsWithParams(subreddit: "ios", limit: 1)
-        service.delegate = self
     }
     
     func postsFetched(posts: PostResponseData) {
         let post = posts.data.children[0].data;
         DispatchQueue.main.async {
             self.titleLabel.text = post.title
-            self.timeLabel.text = String((Date().timeIntervalSince1970 - Double(post.created))/3600) + " h"
+            self.timeLabel.text = self.convert(time: Date().timeIntervalSince1970 - Double(post.created))
             self.domainLabel.text = post.domain
             self.authorLabel.text = post.username
             self.likesLabel.text = String(post.ups - post.downs)
@@ -42,7 +41,28 @@ class ViewController: UIViewController, DataLoaderDelegate {
             self.bookmarkBtn.setImage(UIImage(systemName: post.saved ? "bookmark.fill" : "bookmark"), for: .normal)
         }
     }
-
-
+    
+    func convert(time: Double) -> String {
+        var oldTime = time
+        var newTime = time / 60.0
+        if (newTime < 1) {
+            return "\(Int(oldTime)) s"
+        }
+        oldTime = newTime
+        newTime = oldTime / 60.0
+        if (newTime < 1) {
+            return "\(Int(oldTime)) m"
+        }
+        oldTime = newTime
+        newTime = oldTime / 24.0
+        if (newTime < 1) {
+            return "\(Int(oldTime)) h"
+        }
+        return "\(Int(newTime)) d"
+    }
+    
+    
+    
+    
 }
 
