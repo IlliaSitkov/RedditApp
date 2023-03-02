@@ -19,6 +19,10 @@
 		959D342429A8C102002EE530 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D342329A8C102002EE530 /* PostManager.swift */; };
 		95A0662E29A8ACB5008D2430 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 95A0662D29A8ACB5008D2430 /* SDWebImage */; };
 		95A0663029A8ACB5008D2430 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 95A0662F29A8ACB5008D2430 /* SDWebImageMapKit */; };
+		95B8FDCF29AFBF70005B7735 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8FDCE29AFBF70005B7735 /* PostView.swift */; };
+		95B8FDD229AFBFD6005B7735 /* PostView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95B8FDD129AFBFD6005B7735 /* PostView.xib */; };
+		95C742EE29AFD97B00D10D82 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C742ED29AFD97B00D10D82 /* PostCell.swift */; };
+		95C742F029AFDDD800D10D82 /* PostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C742EF29AFDDD800D10D82 /* PostListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		958D809B29A749F800241DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		958D809D29A749F800241DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		959D342329A8C102002EE530 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
+		95B8FDCE29AFBF70005B7735 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		95B8FDD129AFBFD6005B7735 /* PostView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostView.xib; sourceTree = "<group>"; };
+		95C742ED29AFD97B00D10D82 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		95C742EF29AFDDD800D10D82 /* PostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,9 +94,11 @@
 		958D808E29A749F200241DFB /* RedditApp */ = {
 			isa = PBXGroup;
 			children = (
+				95C742F129AFDE2900D10D82 /* controllers */,
+				95B8FDD029AFBFA5005B7735 /* templates */,
+				95B8FDCD29AFBEFF005B7735 /* views */,
 				958D808F29A749F200241DFB /* AppDelegate.swift */,
 				958D809129A749F200241DFB /* SceneDelegate.swift */,
-				958D809329A749F200241DFB /* ViewController.swift */,
 				950C99EC29A80C180011D9FE /* models */,
 				950C99E929A80AC00011D9FE /* services */,
 				958D809529A749F200241DFB /* Main.storyboard */,
@@ -97,6 +107,32 @@
 				958D809D29A749F800241DFB /* Info.plist */,
 			);
 			path = RedditApp;
+			sourceTree = "<group>";
+		};
+		95B8FDCD29AFBEFF005B7735 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				95B8FDCE29AFBF70005B7735 /* PostView.swift */,
+				95C742ED29AFD97B00D10D82 /* PostCell.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		95B8FDD029AFBFA5005B7735 /* templates */ = {
+			isa = PBXGroup;
+			children = (
+				95B8FDD129AFBFD6005B7735 /* PostView.xib */,
+			);
+			path = templates;
+			sourceTree = "<group>";
+		};
+		95C742F129AFDE2900D10D82 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				958D809329A749F200241DFB /* ViewController.swift */,
+				95C742EF29AFDDD800D10D82 /* PostListViewController.swift */,
+			);
+			path = controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +202,7 @@
 			files = (
 				958D809C29A749F800241DFB /* LaunchScreen.storyboard in Resources */,
 				958D809929A749F800241DFB /* Assets.xcassets in Resources */,
+				95B8FDD229AFBFD6005B7735 /* PostView.xib in Resources */,
 				958D809729A749F200241DFB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,8 +216,11 @@
 			files = (
 				958D809429A749F200241DFB /* ViewController.swift in Sources */,
 				950C99E629A7F7EF0011D9FE /* URLBuilder.swift in Sources */,
+				95B8FDCF29AFBF70005B7735 /* PostView.swift in Sources */,
 				950C99EE29A80C3B0011D9FE /* Post.swift in Sources */,
 				950C99F229A827EC0011D9FE /* JSONDecoderX.swift in Sources */,
+				95C742EE29AFD97B00D10D82 /* PostCell.swift in Sources */,
+				95C742F029AFDDD800D10D82 /* PostListViewController.swift in Sources */,
 				959D342429A8C102002EE530 /* PostManager.swift in Sources */,
 				958D809029A749F200241DFB /* AppDelegate.swift in Sources */,
 				958D809229A749F200241DFB /* SceneDelegate.swift in Sources */,

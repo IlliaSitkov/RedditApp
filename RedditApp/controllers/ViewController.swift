@@ -15,13 +15,13 @@ class ViewController: UIViewController, PostManagerDelegate {
     let bookmarkSet = UIImage(systemName: "bookmark.circle.fill") ?? UIImage(systemName: "bookmark.fill")
     let bookmarkUnset = UIImage(systemName: "bookmark.circle") ?? UIImage(systemName: "bookmark")
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var authorLabel: UILabel!
-    @IBOutlet weak var commentsBtn: UIButton!
-    @IBOutlet weak var likesLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var bookmarkBtn: UIButton!
-    @IBOutlet weak var upvotesImg: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var authorLabel: UILabel!
+    @IBOutlet private weak var commentsBtn: UIButton!
+    @IBOutlet private weak var likesLabel: UILabel!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var bookmarkBtn: UIButton!
+    @IBOutlet private weak var upvotesImg: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +31,12 @@ class ViewController: UIViewController, PostManagerDelegate {
         upvotesImg.image = UIImage(systemName: "arrow.up.heart")        
         
         service.delegate = self
-        service.getPostsWithParams(subreddit: "ios", limit: 1)
+        service.getPostsWithParams(subreddit: "nature", limit: 1)
     }
     
-    func postsFetched(posts: PostResponseData) {
-        guard posts.data.children.count > 0 else {return}
-        let post = posts.data.children[0].data;
+    func postsUpdated(posts: [Post]) {
+        guard posts.count > 0 else {return}
+        let post = posts[0];
         DispatchQueue.main.async {
             self.titleLabel.text = post.title
             let time = self.convert(time: Date().timeIntervalSince1970 - Double(post.created))
@@ -44,8 +44,10 @@ class ViewController: UIViewController, PostManagerDelegate {
             self.authorLabel.text = "\(post.username) • \(time) • \(domain)"
             self.likesLabel.text = String(post.ups - post.downs)
             self.commentsBtn.setTitle(String(post.numComments), for: .normal)
-            if post.preview.images.count > 0 {
-                self.imageView.sd_setImage(with: URL(string: post.preview.images[0].source.url.replacingOccurrences(of: "amp;", with: "")), placeholderImage: nil)
+            if let preview = post.preview, preview.images.count > 0 {
+                self.imageView.sd_setImage(with: URL(string: preview.images[0].source.url.replacingOccurrences(of: "amp;", with: "")), placeholderImage: nil)
+            } else {
+                self.imageView.sd_setImage(with: URL(string: post.thumbnail), placeholderImage: nil)
             }
             self.bookmarkBtn.setImage(post.saved ? self.bookmarkSet : self.bookmarkUnset, for: .normal)
         }

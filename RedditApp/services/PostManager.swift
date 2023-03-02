@@ -8,27 +8,47 @@
 import Foundation
 
 protocol PostManagerDelegate {
-    func postsFetched(posts: PostResponseData)
+    func postsUpdated(posts: [Post])
 }
 
-class PostManager {
+final class PostManager {
 
     private let decoder = JSONDecoder()
     var delegate: PostManagerDelegate?
+    
+    private(set) var posts = [Post]()
+    private var after = ""
+    
+    private static var _instance: PostManager?
+    
+    static var instance: PostManager {
+        if let pm = _instance {
+            return pm
+        } else {
+            let pm = PostManager()
+            _instance = pm
+            return pm
+        }
+    }
+    
+    private init() {}
 
     private let baseUrl = URLBuilder()
         .scheme("https")
         .host("www.reddit.com")
         .path("/r/ios/top.json")
     
-
-    func getPostsWithParams(subreddit: String, limit: Int, after: String = "") {
+//    func loadMorePosts(subreddit: String, limit: Int) {
+//        loadPostsWithParams(subreddit: sub, limit: )
+//    }
+//
+    func loadPostsWithParams(subreddit: String, limit: Int, after: String = "") {
         guard let url = baseUrl.changePath(to: subreddit, at: 1)?.withNew(queryParams: ("limit", limit), ("after", after)).build()
         else {return}
         self.performRequest(url: url)
     }
     
-    func performRequest(url: URL) {
+    private func performRequest(url: URL) {
         let session  = URLSession(configuration: .default)
         let task = session.dataTask(with: url) { data, response, error in
             guard let data = data,
@@ -38,7 +58,9 @@ class PostManager {
                 print("Error while performing the request: \(url)")
                 return
             }
-            delegate.postsFetched(posts: decoded)
+            let posts = decoded.data.children.map {$0.data}
+            self.posts = posts
+            delegate.postsUpdated(posts: posts)
         }
         task.resume()
     }
