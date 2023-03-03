@@ -7,7 +7,6 @@
 
 import UIKit
 
-//@IBDesignable
 final class PostView: UIView {
     
     let kCONTENT_XIB_NAME = "PostView"
@@ -42,8 +41,8 @@ final class PostView: UIView {
         upvotesImg.image = UIImage(systemName: "arrow.up.heart")
     }
     
-    func clear() {
-        self.imageView.image = nil
+    func resetDefaultImage() {
+        self.imageView.image = UIImage(systemName: "photo")
     }
     
     func config(with post: Post) {
@@ -55,14 +54,12 @@ final class PostView: UIView {
         self.commentsBtn.setTitle(String(post.numComments), for: .normal)
         var imageUrl = ""
         if let preview = post.preview,
-               preview.images.count > 0
+           preview.images.count > 0
         {
             let image = preview.images[0]
             imageUrl = (image.resolutions.last {$0.width < 300})?.url ?? image.source.url
-        } else {
-            imageUrl =  post.thumbnail
+            self.imageView.sd_setImage(with: URL(string:imageUrl.replacingOccurrences(of: "amp;", with: "")), placeholderImage: nil)
         }
-        self.imageView.sd_setImage(with: URL(string:imageUrl.replacingOccurrences(of: "amp;", with: "")), placeholderImage: nil)
         self.bookmarkBtn.setImage(post.saved ? self.bookmarkSet : self.bookmarkUnset, for: .normal)
     }
     

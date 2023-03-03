@@ -12,12 +12,17 @@ final class PostCell: UITableViewCell {
     
     @IBOutlet private weak var postView: PostView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.selectionStyle = .none
+    }
+    
     func config(with data: Post) {
         self.postView.config(with: data)
     }
     
     override func prepareForReuse() {
-        self.postView.clear()
+        self.postView.resetDefaultImage()
     }
     
 }

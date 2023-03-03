@@ -12,12 +12,20 @@ protocol PostManagerDelegate {
 }
 
 final class PostManager {
-
+    
     private let decoder = JSONDecoder()
+    private let dataLoader = DataLoader()
+    
     var delegate: PostManagerDelegate?
     
     private(set) var posts = [Post]()
-    private var after = ""
+    
+    private var after: String {
+        posts.last?.name ?? ""
+    }
+    
+    private(set) var isLoading = false
+    private(set) var hasMorePosts = true
     
     private static var _instance: PostManager?
     
@@ -32,37 +40,49 @@ final class PostManager {
     }
     
     private init() {}
-
+    
     private let baseUrl = URLBuilder()
         .scheme("https")
         .host("www.reddit.com")
         .path("/r/ios/top.json")
     
-//    func loadMorePosts(subreddit: String, limit: Int) {
-//        loadPostsWithParams(subreddit: sub, limit: )
-//    }
-//
-    func loadPostsWithParams(subreddit: String, limit: Int, after: String = "") {
-        guard let url = baseUrl.changePath(to: subreddit, at: 1)?.withNew(queryParams: ("limit", limit), ("after", after)).build()
+    func loadMorePosts(subreddit: String, limit: Int) async {
+        print("loadMorePosts called")
+        self.isLoading = true
+        defer {
+            self.isLoading = false
+        }
+        guard let posts = await self.getPostsWithParams(subreddit: subreddit, limit: limit, after: self.after)
         else {return}
-        self.performRequest(url: url)
+        self.hasMorePosts = posts.count > 0
+        self.posts.append(contentsOf: posts)
+        self.notifyDelegatePostsUpdated()
     }
     
-    private func performRequest(url: URL) {
-        let session  = URLSession(configuration: .default)
-        let task = session.dataTask(with: url) { data, response, error in
-            guard let data = data,
-                  let delegate = self.delegate,
-                  let decoded = self.decoder.parseJSON(PostResponseData.self, from: data)
-            else {
-                print("Error while performing the request: \(url)")
-                return
-            }
-            let posts = decoded.data.children.map {$0.data}
-            self.posts = posts
-            delegate.postsUpdated(posts: posts)
+    func loadPostsWithParams(subreddit: String, limit: Int, after: String = "") async {
+        print("loadPostsWithParams called")
+        self.isLoading = true
+        defer {
+            self.isLoading = false
         }
-        task.resume()
+        guard let posts = await self.getPostsWithParams(subreddit: subreddit, limit: limit, after: after)
+        else {return}
+        self.posts = posts
+        self.notifyDelegatePostsUpdated()
+    }
+    
+    private func notifyDelegatePostsUpdated() {
+        if let delegate = self.delegate {
+            delegate.postsUpdated(posts: self.posts)
+        }
+    }
+    
+    func getPostsWithParams(subreddit: String, limit: Int, after: String) async -> [Post]?  {
+        guard let url = baseUrl.changePath(to: subreddit, at: 1)?.withNew(queryParams: ("limit", limit), ("after", after)).build(),
+              let data = await dataLoader.performGetRequest(url: url),
+              let decoded = self.decoder.parseJSON(PostResponseData.self, from: data)
+        else {return nil}
+        return decoded.data.children.map {$0.data}
     }
     
     

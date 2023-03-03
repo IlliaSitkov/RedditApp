@@ -10,7 +10,7 @@ import SDWebImage
 
 class ViewController: UIViewController, PostManagerDelegate {
     
-    var service = PostManager()
+    var service = PostManager.instance
     
     let bookmarkSet = UIImage(systemName: "bookmark.circle.fill") ?? UIImage(systemName: "bookmark.fill")
     let bookmarkUnset = UIImage(systemName: "bookmark.circle") ?? UIImage(systemName: "bookmark")
@@ -28,10 +28,12 @@ class ViewController: UIViewController, PostManagerDelegate {
         // Do any additional setup after loading the view.
         
         commentsBtn.setImage(UIImage(systemName: "plus.message"), for: .normal)
-        upvotesImg.image = UIImage(systemName: "arrow.up.heart")        
+        upvotesImg.image = UIImage(systemName: "arrow.up.heart")
         
         service.delegate = self
-        service.getPostsWithParams(subreddit: "nature", limit: 1)
+        Task {
+            await service.loadPostsWithParams(subreddit: "nature", limit: 1)
+        }
     }
     
     func postsUpdated(posts: [Post]) {
@@ -46,8 +48,6 @@ class ViewController: UIViewController, PostManagerDelegate {
             self.commentsBtn.setTitle(String(post.numComments), for: .normal)
             if let preview = post.preview, preview.images.count > 0 {
                 self.imageView.sd_setImage(with: URL(string: preview.images[0].source.url.replacingOccurrences(of: "amp;", with: "")), placeholderImage: nil)
-            } else {
-                self.imageView.sd_setImage(with: URL(string: post.thumbnail), placeholderImage: nil)
             }
             self.bookmarkBtn.setImage(post.saved ? self.bookmarkSet : self.bookmarkUnset, for: .normal)
         }

@@ -13,7 +13,6 @@ struct PostResponseData: Decodable {
 }
 struct Posts: Decodable {
     let children: [PostData]
-    let after: String
 }
 struct PostData: Decodable {
     let data: Post
@@ -25,15 +24,15 @@ struct Post: Decodable {
     let domain: String
     let title: String
     let preview: PreviewImages?
-    let thumbnail: String
     let numComments: Int
     let ups: Int
     let downs: Int
     let created: Int
     let saved = Bool.random()
+    let name: String
     
     enum CodingKeys: String, CodingKey {
-        case domain,title,ups,downs, numComments,preview,created,thumbnail
+        case domain,title,ups,downs, numComments,preview,created,name
         case username = "authorFullname"
     }
 }

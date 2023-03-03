@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YLu-0O-cv9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IYy-Cf-NWQ">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -16,9 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lNE-US-HCh" customClass="PostView" customModule="RedditApp" customModuleProvider="target">
-                                <rect key="frame" x="16" y="313" width="382" height="241"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lNE-US-HCh" customClass="PostView" customModule="RedditApp" customModuleProvider="target">
+                                <rect key="frame" x="16" y="327.66666666666669" width="382" height="241.00000000000006"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="1" constant="241" id="dWl-RJ-YsW"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Use-2a-pxv"/>
@@ -32,7 +35,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDJ-Hd-NqA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-991.304347826087" y="60.9375"/>
+            <point key="canvasLocation" x="-1430" y="-76"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -147,7 +150,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="44.927536231884062" y="52.989130434782609"/>
+            <point key="canvasLocation" x="-1430" y="597"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LmJ-sW-Jnh">
+            <objects>
+                <navigationController toolbarHidden="NO" id="IYy-Cf-NWQ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YMV-aT-qYk">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="T5t-f8-1f0">
+                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="YLu-0O-cv9" kind="relationship" relationship="rootViewController" id="ATH-02-b8Z"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="46g-cv-Vaa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="471" y="55"/>
         </scene>
         <!--Post List View Controller-->
         <scene sceneID="lys-EU-VI5">
@@ -157,61 +180,122 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sDF-jQ-udf">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3Qj-2g-A9n">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="post_cell" id="0Nz-ZW-N6D" customClass="PostCell" customModule="RedditApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="16.333333969116211"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Nz-ZW-N6D" id="6Jb-dG-HcP">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="16.333333969116211"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QjE-Xx-lab" customClass="PostView" customModule="RedditApp" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="0.0" width="398" height="0.33333333333333331"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="QjE-Xx-lab" firstAttribute="top" secondItem="6Jb-dG-HcP" secondAttribute="top" id="3cY-EP-wl9"/>
-                                                <constraint firstItem="QjE-Xx-lab" firstAttribute="leading" secondItem="6Jb-dG-HcP" secondAttribute="leading" constant="8" id="9go-gr-rii"/>
-                                                <constraint firstAttribute="trailing" secondItem="QjE-Xx-lab" secondAttribute="trailing" constant="8" id="Yf9-fq-HeB"/>
-                                                <constraint firstAttribute="bottom" secondItem="QjE-Xx-lab" secondAttribute="bottom" constant="16" id="d7M-Rp-51v"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rh2-dr-jJY">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="46.666666666666664"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ce2-6F-ufU">
+                                                <rect key="frame" x="0.0" y="0.0" width="352.66666666666669" height="46.666666666666664"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-Js-N4z">
+                                                <rect key="frame" x="352.66666666666669" y="0.0" width="61.333333333333314" height="46.666666666666664"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="bookmark.circle.fill" catalog="system" buttonSize="large"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sDF-jQ-udf">
+                                        <rect key="frame" x="0.0" y="46.666666666666686" width="414" height="771.33333333333326"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="post_cell" id="0Nz-ZW-N6D" customClass="PostCell" customModule="RedditApp" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="44.666666030883789" width="414" height="16.333333969116211"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Nz-ZW-N6D" id="6Jb-dG-HcP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="16.333333969116211"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QjE-Xx-lab" customClass="PostView" customModule="RedditApp" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="0.0" width="398" height="0.33333333333333331"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="QjE-Xx-lab" firstAttribute="top" secondItem="6Jb-dG-HcP" secondAttribute="top" id="3cY-EP-wl9"/>
+                                                        <constraint firstItem="QjE-Xx-lab" firstAttribute="leading" secondItem="6Jb-dG-HcP" secondAttribute="leading" constant="8" id="9go-gr-rii"/>
+                                                        <constraint firstAttribute="trailing" secondItem="QjE-Xx-lab" secondAttribute="trailing" constant="8" id="Yf9-fq-HeB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="QjE-Xx-lab" secondAttribute="bottom" constant="16" id="d7M-Rp-51v"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="postView" destination="QjE-Xx-lab" id="3YO-e7-B8Q"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
                                         <connections>
-                                            <outlet property="postView" destination="QjE-Xx-lab" id="3YO-e7-B8Q"/>
+                                            <outlet property="dataSource" destination="YLu-0O-cv9" id="esD-ba-f77"/>
+                                            <outlet property="delegate" destination="YLu-0O-cv9" id="dsZ-Ua-0q2"/>
                                         </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="YLu-0O-cv9" id="esD-ba-f77"/>
-                                    <outlet property="delegate" destination="YLu-0O-cv9" id="dsZ-Ua-0q2"/>
-                                </connections>
-                            </tableView>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="psb-V4-1bM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="psb-V4-1bM" firstAttribute="trailing" secondItem="sDF-jQ-udf" secondAttribute="trailing" id="VCl-Ga-Ljz"/>
-                            <constraint firstItem="sDF-jQ-udf" firstAttribute="top" secondItem="psb-V4-1bM" secondAttribute="top" id="dCZ-Sb-wmB"/>
-                            <constraint firstItem="psb-V4-1bM" firstAttribute="bottom" secondItem="sDF-jQ-udf" secondAttribute="bottom" id="lza-4T-q7L"/>
-                            <constraint firstItem="sDF-jQ-udf" firstAttribute="leading" secondItem="psb-V4-1bM" secondAttribute="leading" id="x9F-w7-cbh"/>
+                            <constraint firstItem="3Qj-2g-A9n" firstAttribute="bottom" secondItem="psb-V4-1bM" secondAttribute="bottom" id="HB4-SO-XoS"/>
+                            <constraint firstItem="3Qj-2g-A9n" firstAttribute="leading" secondItem="C54-Xu-NAy" secondAttribute="leading" id="KMP-yd-naY"/>
+                            <constraint firstItem="psb-V4-1bM" firstAttribute="trailing" secondItem="3Qj-2g-A9n" secondAttribute="trailing" id="ZLx-Te-I8N"/>
+                            <constraint firstItem="3Qj-2g-A9n" firstAttribute="top" secondItem="psb-V4-1bM" secondAttribute="top" id="rBd-Ol-iYP"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Fww-Ll-vMc"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="postsTableView" destination="sDF-jQ-udf" id="fG3-sR-Aks"/>
+                        <outlet property="subredditLabel" destination="Ce2-6F-ufU" id="1xa-g5-l0j"/>
+                        <segue destination="xLo-0F-Zjp" kind="show" identifier="go_to_post_details" id="nG3-cF-z31"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sLK-p4-7qQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965" y="60"/>
+            <point key="canvasLocation" x="1321.7391304347827" y="54.910714285714285"/>
+        </scene>
+        <!--Post Details View Controller-->
+        <scene sceneID="554-Ok-2Jt">
+            <objects>
+                <viewController id="xLo-0F-Zjp" customClass="PostDetailsViewController" customModule="RedditApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="czA-vv-iHP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wR8-Aj-hnL" customClass="PostView" customModule="RedditApp" customModuleProvider="target">
+                                <rect key="frame" x="8" y="60" width="398" height="158"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="1" constant="158" id="xf0-jA-iGg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="msi-d3-Z9S"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="msi-d3-Z9S" firstAttribute="trailing" secondItem="wR8-Aj-hnL" secondAttribute="trailing" constant="8" id="LDq-wE-WCM"/>
+                            <constraint firstItem="wR8-Aj-hnL" firstAttribute="leading" secondItem="msi-d3-Z9S" secondAttribute="leading" constant="8" id="Ve4-DR-9Tf"/>
+                            <constraint firstItem="wR8-Aj-hnL" firstAttribute="top" secondItem="msi-d3-Z9S" secondAttribute="top" constant="16" id="cGU-VK-0rZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="xgY-cM-GGw"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="postView" destination="wR8-Aj-hnL" id="2HC-YB-lEh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pgw-U9-q17" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2157.971014492754" y="54.910714285714285"/>
         </scene>
     </scenes>
     <resources>
         <image name="arrow.up.circle" catalog="system" width="128" height="121"/>
         <image name="bookmark" catalog="system" width="112" height="128"/>
+        <image name="bookmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
