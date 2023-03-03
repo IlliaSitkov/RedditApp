@@ -26,46 +26,49 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="cPt-Tf-e1Y">
-                    <rect key="frame" x="8" y="8" width="296" height="31"/>
+                    <rect key="frame" x="8" y="8" width="296" height="40.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rql-eN-UfX">
-                            <rect key="frame" x="0.0" y="0.0" width="37" height="31"/>
+                            <rect key="frame" x="0.0" y="0.0" width="37" height="40.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" systemColor="systemGrayColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBw-XU-iWp">
-                            <rect key="frame" x="253" y="0.0" width="43" height="31"/>
+                            <rect key="frame" x="255.5" y="0.0" width="40.5" height="40.5"/>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="bookmark" catalog="system" title="" buttonSize="medium"/>
+                            <buttonConfiguration key="configuration" style="plain" image="bookmark" catalog="system" title="" cornerStyle="capsule" buttonSize="medium">
+                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="22"/>
+                            </buttonConfiguration>
                         </button>
                     </subviews>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UhU-Ua-HUc">
-                    <rect key="frame" x="8" y="47" width="296" height="20.5"/>
+                    <rect key="frame" x="8" y="56.5" width="296" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jOa-b0-5qy">
-                    <rect key="frame" x="0.0" y="76.5" width="312" height="197.5"/>
+                    <rect key="frame" x="0.0" y="86" width="312" height="197.5"/>
                     <color key="tintColor" systemColor="systemGray5Color"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="MUI-eU-QKg"/>
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cnE-Cx-A4S">
-                    <rect key="frame" x="8" y="283.5" width="296" height="63.5"/>
+                    <rect key="frame" x="8" y="293" width="296" height="54"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="PwQ-Gi-th1">
-                            <rect key="frame" x="0.0" y="22" width="46" height="20"/>
+                            <rect key="frame" x="0.0" y="15" width="49" height="24"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.up.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Cmk-3A-z1f">
-                                    <rect key="frame" x="0.0" y="0.5" width="20" height="19"/>
+                                    <rect key="frame" x="0.0" y="0.5" width="23" height="23"/>
                                     <color key="tintColor" systemColor="systemGrayColor"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYb-cH-Qdk">
-                                    <rect key="frame" x="22" y="0.0" width="24" height="20"/>
+                                    <rect key="frame" x="25" y="0.0" width="24" height="24"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" systemColor="systemGrayColor"/>
                                     <nil key="highlightedColor"/>
@@ -73,14 +76,20 @@
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmy-jU-eTy">
-                            <rect key="frame" x="112.5" y="19.5" width="57.5" height="24.5"/>
+                            <rect key="frame" x="107.5" y="13" width="64.5" height="28"/>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="message" catalog="system" title="98" imagePadding="2" buttonSize="small"/>
+                            <buttonConfiguration key="configuration" style="plain" image="message" catalog="system" title="98" imagePadding="2" buttonSize="small">
+                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="15"/>
+                                <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                            </buttonConfiguration>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u2X-cZ-jT0">
-                            <rect key="frame" x="223.5" y="19.5" width="72.5" height="24.5"/>
+                            <rect key="frame" x="214.5" y="13" width="81.5" height="28"/>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system" title="Share" imagePadding="2" buttonSize="small"/>
+                            <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system" title="Share" imagePadding="2" buttonSize="small">
+                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="15"/>
+                                <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                            </buttonConfiguration>
                         </button>
                     </subviews>
                 </stackView>

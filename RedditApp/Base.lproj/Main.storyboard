@@ -183,24 +183,35 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3Qj-2g-A9n">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rh2-dr-jJY">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="46.666666666666664"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1f-47-wJs">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ce2-6F-ufU">
-                                                <rect key="frame" x="0.0" y="0.0" width="352.66666666666669" height="46.666666666666664"/>
+                                                <rect key="frame" x="178.66666666666666" y="17.666666666666664" width="56.666666666666657" height="28.666666666666664"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-Js-N4z">
-                                                <rect key="frame" x="352.66666666666669" y="0.0" width="61.333333333333314" height="46.666666666666664"/>
+                                                <rect key="frame" x="359.33333333333331" y="12.666666666666664" width="38.666666666666686" height="38.666666666666664"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="bookmark.circle.fill" catalog="system" buttonSize="large"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="bookmark.circle.fill" catalog="system" cornerStyle="capsule" buttonSize="mini">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="24"/>
+                                                </buttonConfiguration>
                                             </button>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="BfV-Js-N4z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="C1f-47-wJs" secondAttribute="leading" constant="20" symbolic="YES" id="6kC-vH-sGv"/>
+                                            <constraint firstItem="BfV-Js-N4z" firstAttribute="centerY" secondItem="C1f-47-wJs" secondAttribute="centerY" id="Kgl-1E-jgD"/>
+                                            <constraint firstItem="Ce2-6F-ufU" firstAttribute="centerX" secondItem="C1f-47-wJs" secondAttribute="centerX" id="Xx0-Cs-zos"/>
+                                            <constraint firstAttribute="trailing" secondItem="BfV-Js-N4z" secondAttribute="trailing" constant="16" id="g3N-sK-6Jc"/>
+                                            <constraint firstAttribute="height" constant="64" id="kSM-ka-jbk"/>
+                                            <constraint firstItem="Ce2-6F-ufU" firstAttribute="centerY" secondItem="C1f-47-wJs" secondAttribute="centerY" id="qcj-mv-7s4"/>
+                                        </constraints>
+                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sDF-jQ-udf">
-                                        <rect key="frame" x="0.0" y="46.666666666666686" width="414" height="771.33333333333326"/>
+                                        <rect key="frame" x="0.0" y="64" width="414" height="754"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="post_cell" id="0Nz-ZW-N6D" customClass="PostCell" customModule="RedditApp" customModuleProvider="target">
