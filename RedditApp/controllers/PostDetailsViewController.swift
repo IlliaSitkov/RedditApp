@@ -12,6 +12,8 @@ final class PostDetailsViewController: UIViewController {
     
     @IBOutlet private weak var postView: PostView!
     
+    private let stateManager = StateManager.instance
+    
     func config(with data: Post) {
         self.postView.config(with: data)
         self.postView.delegate = self
@@ -21,8 +23,17 @@ final class PostDetailsViewController: UIViewController {
 
 //MARK: - PostViewDelegate
 extension PostDetailsViewController: PostViewDelegate {
+    
     func shareButtonClicked(url: URL) {
         let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         present(ac, animated: true)
+    }
+    
+    func saveButtonClicked(id: String, saved: Bool) {
+        if saved {
+            self.stateManager.handle(action: .savePost(id: id))
+        } else {
+            self.stateManager.handle(action: .unsavePost(id: id))
+        }
     }
 }

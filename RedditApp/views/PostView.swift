@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol PostViewDelegate: AnyObject {
     func shareButtonClicked(url: URL)
+    func saveButtonClicked(id: String, saved: Bool)
 }
 
 final class PostView: UIView {
@@ -58,6 +60,17 @@ final class PostView: UIView {
               let url = URL(string: post.url)
         else {return}
         delegate.shareButtonClicked(url: url)
+    }
+    
+    @IBAction func saveButtonClicked() {
+        guard let delegate = delegate,
+              let post = self.post
+        else {return}
+        let saved = !post.saved
+        self.post?.saved = saved
+        let image = saved ? self.bookmarkSet : self.bookmarkUnset
+        self.bookmarkBtn.setImage(image, for: .normal)
+        delegate.saveButtonClicked(id: post.id, saved: saved)
     }
     
     func config(with post: Post) {

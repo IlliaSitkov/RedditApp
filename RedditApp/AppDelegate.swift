@@ -11,15 +11,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
-    private let postManager = PostManager.instance
-
+    private let stateManager = StateManager.instance
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print("didFinishLaunchingWithOptions")
-        Task {
-            await self.postManager.loadPostsWithParams(subreddit: Const.SUBREDDIT, limit: Const.INITIAL_LOAD_POSTS_N)
-        }
+        self.stateManager.handle(action: .initialLoad(num: Const.INITIAL_LOAD_POSTS_N, subreddit: Const.SUBREDDIT))
         return true
     }
     

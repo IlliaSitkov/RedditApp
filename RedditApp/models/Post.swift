@@ -8,18 +8,19 @@
 import Foundation
 
 
-struct PostResponseData: Decodable {
+struct PostResponseData: Codable {
     let data: Posts
 }
-struct Posts: Decodable {
+struct Posts: Codable {
     let children: [PostData]
 }
-struct PostData: Decodable {
+struct PostData: Codable {
     let data: Post
 }
 
-struct Post: Decodable {
+struct Post: Codable {
     
+    let id: String
     let username: String
     let domain: String
     let title: String
@@ -28,29 +29,29 @@ struct Post: Decodable {
     let ups: Int
     let downs: Int
     let created: Int
-    let saved = Bool.random()
+    var saved: Bool
     let name: String
     let url: String
     
     enum CodingKeys: String, CodingKey {
-        case domain,title,ups,downs, numComments,preview,created,name,url
+        case domain,title,ups,downs, numComments,preview,created,name,url,id,saved
         case username = "authorFullname"
     }
 }
-struct PreviewImages: Decodable {
+struct PreviewImages: Codable {
     let images: [Image]
 }
 
-struct Image: Decodable {
+struct Image: Codable {
     let source: ImageSource
     let resolutions: [Resolution]
 }
 
-struct ImageSource: Decodable {
+struct ImageSource: Codable {
     let url: String
 }
 
-struct Resolution: Decodable {
+struct Resolution: Codable {
     let url: String
     let width: Int
     let height: Int
