@@ -68,6 +68,8 @@ final class PostListViewController: UIViewController {
     func switchMode() {
         self.showSaved = !self.showSaved
         self.textView.isHidden = !self.showSaved
+        self.textField.text = ""
+        self.searchString = ""
         self.postsTableView.reloadData()
     }
     
