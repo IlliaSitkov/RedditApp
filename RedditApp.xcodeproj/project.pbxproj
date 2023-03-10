@@ -20,7 +20,6 @@
 		958D809C29A749F800241DFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958D809A29A749F800241DFB /* LaunchScreen.storyboard */; };
 		959716A329B0E18F00D8C39B /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959716A229B0E18F00D8C39B /* DataLoader.swift */; };
 		959716A529B10B0A00D8C39B /* PostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959716A429B10B0A00D8C39B /* PostDetailsViewController.swift */; };
-		959D342429A8C102002EE530 /* PostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D342329A8C102002EE530 /* PostManager.swift */; };
 		95A0662E29A8ACB5008D2430 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 95A0662D29A8ACB5008D2430 /* SDWebImage */; };
 		95A0663029A8ACB5008D2430 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 95A0662F29A8ACB5008D2430 /* SDWebImageMapKit */; };
 		95B8FDCF29AFBF70005B7735 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8FDCE29AFBF70005B7735 /* PostView.swift */; };
@@ -45,7 +44,6 @@
 		958D809D29A749F800241DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		959716A229B0E18F00D8C39B /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		959716A429B10B0A00D8C39B /* PostDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailsViewController.swift; sourceTree = "<group>"; };
-		959D342329A8C102002EE530 /* PostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManager.swift; sourceTree = "<group>"; };
 		95B8FDCE29AFBF70005B7735 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		95B8FDD129AFBFD6005B7735 /* PostView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostView.xib; sourceTree = "<group>"; };
 		95C742ED29AFD97B00D10D82 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
@@ -70,7 +68,6 @@
 			children = (
 				950C99E529A7F7EF0011D9FE /* URLBuilder.swift */,
 				959716A229B0E18F00D8C39B /* DataLoader.swift */,
-				959D342329A8C102002EE530 /* PostManager.swift */,
 				953C94DB29BB4A1300E55B14 /* PostLoader.swift */,
 				950C99F129A827EC0011D9FE /* JSONDecoderX.swift */,
 				953C94D729BB42B900E55B14 /* PostStore.swift */,
@@ -235,7 +232,6 @@
 				95C742EE29AFD97B00D10D82 /* PostCell.swift in Sources */,
 				95C742F029AFDDD800D10D82 /* PostListViewController.swift in Sources */,
 				953C94DC29BB4A1300E55B14 /* PostLoader.swift in Sources */,
-				959D342429A8C102002EE530 /* PostManager.swift in Sources */,
 				953C94D829BB42B900E55B14 /* PostStore.swift in Sources */,
 				959716A529B10B0A00D8C39B /* PostDetailsViewController.swift in Sources */,
 				958D809029A749F200241DFB /* AppDelegate.swift in Sources */,
