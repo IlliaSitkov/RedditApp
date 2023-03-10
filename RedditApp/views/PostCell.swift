@@ -12,6 +12,12 @@ final class PostCell: UITableViewCell {
     
     @IBOutlet private weak var postView: PostView!
     
+    weak var delegate: PostViewDelegate? {
+        didSet {
+            self.postView.delegate = self.delegate
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none

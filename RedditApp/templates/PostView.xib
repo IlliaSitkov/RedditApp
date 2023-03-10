@@ -90,6 +90,9 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="15"/>
                                 <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="shareButtonClicked:" destination="-1" eventType="touchUpInside" id="j4Q-ev-K8j"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

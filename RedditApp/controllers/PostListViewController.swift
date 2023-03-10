@@ -94,8 +94,16 @@ extension PostListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Const.REUSABLE_CELL_ID, for: indexPath) as! PostCell
         cell.config(with: postManager.posts[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
 }
 
+//MARK: - PostViewDelegate
+extension PostListViewController: PostViewDelegate {
+    func shareButtonClicked(url: URL) {
+        let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        present(ac, animated: true)
+    }
+}

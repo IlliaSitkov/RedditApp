@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PostViewDelegate: AnyObject {
+    func shareButtonClicked(url: URL)
+}
+
 final class PostView: UIView {
     
     let kCONTENT_XIB_NAME = "PostView"
@@ -23,6 +27,9 @@ final class PostView: UIView {
     
     let bookmarkSet = UIImage(systemName: "bookmark.circle.fill") ?? UIImage(systemName: "bookmark.fill")
     let bookmarkUnset = UIImage(systemName: "bookmark.circle") ?? UIImage(systemName: "bookmark")
+    
+    private var post: Post?
+    weak var delegate: PostViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,7 +52,16 @@ final class PostView: UIView {
         self.imageView.image = UIImage(systemName: "photo")
     }
     
+    @IBAction func shareButtonClicked(_ sender: UIButton) {
+        guard let post = self.post,
+              let delegate = self.delegate,
+              let url = URL(string: post.url)
+        else {return}
+        delegate.shareButtonClicked(url: url)
+    }
+    
     func config(with post: Post) {
+        self.post = post
         self.titleLabel.text = post.title
         let time = self.convert(time: Date().timeIntervalSince1970 - Double(post.created))
         let domain = post.domain

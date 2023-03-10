@@ -30,9 +30,10 @@ struct Post: Decodable {
     let created: Int
     let saved = Bool.random()
     let name: String
+    let url: String
     
     enum CodingKeys: String, CodingKey {
-        case domain,title,ups,downs, numComments,preview,created,name
+        case domain,title,ups,downs, numComments,preview,created,name,url
         case username = "authorFullname"
     }
 }
