@@ -89,15 +89,9 @@ final class PostListViewController: UIViewController {
 //MARK: - PostManagerDelegate
 extension PostListViewController: StateManagerDelegate {
     
-    func stateUpdated(update: StateUpdate) {
-        switch update {
-        case .postsLoaded, .postSaved,
-                .postUnsaved:
-            DispatchQueue.main.async {
-                self.postsTableView.reloadData()
-            }
-        default:
-            break
+    func stateUpdated() {
+        DispatchQueue.main.async {
+            self.postsTableView.reloadData()
         }
     }
     
