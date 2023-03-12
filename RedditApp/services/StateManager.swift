@@ -85,9 +85,9 @@ final class StateManager {
     }
     
     private func unsavePost(id: String) {
+        self.savedPosts.removeAll(where: {$0.id == id})
         guard let postIndex = self.loadedPosts.firstIndex(where: {$0.id == id})
         else {return}
-        self.savedPosts.removeAll(where: {$0.id == id})
         self.loadedPosts[postIndex].saved = false
     }
     

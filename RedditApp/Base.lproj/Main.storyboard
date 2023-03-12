@@ -76,9 +76,6 @@
                                                 <rect key="frame" x="16" y="4" width="382" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <action selector="textFieldChanged:" destination="YLu-0O-cv9" eventType="editingChanged" id="kSE-Og-Grg"/>
-                                                </connections>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

@@ -48,7 +48,7 @@ final class PostListViewController: UIViewController {
         super.viewDidLoad()
         self.stateManager.delegate = self
         self.subredditLabel.text = "/r/\(Const.SUBREDDIT)"
-//        self.textField.delegate = self
+        self.textField.delegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -77,13 +77,6 @@ final class PostListViewController: UIViewController {
         switchMode()
         let imageName = self.showSaved ? "bookmark.circle.fill" : "bookmark.circle"
         self.showSavedButton.setImage(UIImage(systemName: imageName), for: .normal)
-    }
-    
-    @IBAction func textFieldChanged(_ sender: Any) {
-        guard let text = self.textField.text
-        else {return}
-        self.searchString = text
-        self.postsTableView.reloadData()
     }
     
 }
@@ -153,24 +146,23 @@ extension PostListViewController: PostViewDelegate {
     }
 }
 
-////MARK: - UITextFieldDelegate
-//extension PostListViewController: UITextFieldDelegate {
-//
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        guard var text = textField.text
-//        else {return true}
-//        if string.count == 0 {
-//            text = String(text.dropLast())
-//        } else {
-//            text.append(string)
-//        }
-//        self.searchString = text
-//        print("text='\(text)'")
-//        print("string='\(string)'")
-//        print("range='\(range)'")
-//        print("searchString='\(self.searchString)'")
-//        self.postsTableView.reloadData()
-//        return true
-//    }
-//
-//}
+//MARK: - UITextFieldDelegate
+extension PostListViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text as? NSString
+        else {return true}
+        let input = text.replacingCharacters(in: range, with: string)
+        self.searchString = input
+        print("searchString='\(self.searchString)'")
+        self.postsTableView.reloadData()
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        self.searchString = ""
+        self.postsTableView.reloadData()
+        return true
+    }
+    
+}
