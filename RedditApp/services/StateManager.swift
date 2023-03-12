@@ -25,7 +25,20 @@ final class StateManager {
     private(set) var loadedPosts = [Post]()
     private(set) var savedPosts = [Post]()
     private(set) var isLoading = false
-    private(set) var hasMorePosts = true
+    private(set) var loadingIsPossible = true {
+        didSet {
+            if !self.loadingIsPossible {
+                DispatchQueue.main.async {
+                    Timer.scheduledTimer(
+                        timeInterval: Const.LOADING_IS_POSSIBLE_RESET_TIME_S,
+                        target: self,
+                        selector: #selector(self.enableLoading),
+                        userInfo: nil,
+                        repeats: false)
+                }
+            }
+        }
+    }
     
     private var after: String {
         loadedPosts.last?.name ?? ""
@@ -49,6 +62,11 @@ final class StateManager {
     }
     
     private init() {}
+    
+    @objc
+    private func enableLoading() {
+        self.loadingIsPossible = true
+    }
     
     func handle(action: Action) {
         switch action {
@@ -97,15 +115,18 @@ final class StateManager {
     }
 
     private func loadMorePosts(num: Int, subreddit: String) async {
-        guard !self.isLoading && self.hasMorePosts
+        guard !self.isLoading && self.loadingIsPossible
         else {return}
         self.isLoading = true
         defer {
             self.isLoading = false
         }
         guard let loadedPosts = await postLoader.getPostsWithParams(subreddit: subreddit, limit: num, after: after)
-        else {return}
-        self.hasMorePosts = loadedPosts.count > 0
+        else {
+            self.loadingIsPossible = false
+            return
+        }
+        self.loadingIsPossible = loadedPosts.count > 0
         self.loadedPosts.append(contentsOf: markSaved(posts: loadedPosts))
     }
     

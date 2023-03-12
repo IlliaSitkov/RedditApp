@@ -15,6 +15,7 @@ struct Const {
     static let LOAD_MORE_POSTS_N = 10
     static let INITIAL_LOAD_POSTS_N = 20
     static let GO_TO_POST_DETAIL_SEGUE_ID = "go_to_post_details"
+    static let LOADING_IS_POSSIBLE_RESET_TIME_S = 10.0
 }
 
 final class PostListViewController: UIViewController {
@@ -100,7 +101,7 @@ extension PostListViewController: UITableViewDelegate {
               let tableView = scrollView as? UITableView,
               let firstVisibleRow = tableView.indexPathsForVisibleRows?.first?.row,
               firstVisibleRow + Const.MIN_NEXT_POSTS_N > self.posts.count,
-              !self.stateManager.isLoading && self.stateManager.hasMorePosts // without it simulator lags even though loadMore() has the same check inside
+              !self.stateManager.isLoading && self.stateManager.loadingIsPossible // without it simulator lags even though loadMore() has the same check inside
         else {return}
         print("Load more called, row:\(firstVisibleRow)")
         self.stateManager.handle(action: .loadMore(num: Const.LOAD_MORE_POSTS_N, subreddit: Const.SUBREDDIT))
