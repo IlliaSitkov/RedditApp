@@ -34,6 +34,8 @@ final class PostListViewController: UIViewController {
     
     private var searchString = ""
     
+    private var previousScrollOffset: CGFloat = 0
+    
     private var posts: [Post] {
         if self.showSaved {
             let posts = self.stateManager.savedPosts
@@ -97,7 +99,11 @@ extension PostListViewController: StateManagerDelegate {
 extension PostListViewController: UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard !self.showSaved,
+        let currentScrollOffset = scrollView.contentOffset.y
+        let scrolledDown = currentScrollOffset > self.previousScrollOffset
+        self.previousScrollOffset = currentScrollOffset
+        guard scrolledDown,
+              !self.showSaved,
               let tableView = scrollView as? UITableView,
               let firstVisibleRow = tableView.indexPathsForVisibleRows?.first?.row,
               firstVisibleRow + Const.MIN_NEXT_POSTS_N > self.posts.count,
