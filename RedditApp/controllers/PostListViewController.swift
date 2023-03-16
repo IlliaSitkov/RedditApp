@@ -52,6 +52,25 @@ final class PostListViewController: UIViewController {
         self.stateManager.delegate = self
         self.subredditLabel.text = "/r/\(Const.SUBREDDIT)"
         self.textField.delegate = self
+        
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
+        singleTapGestureRecognizer.numberOfTapsRequired = 1
+
+        let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: nil)
+        doubleTapGestureRecognizer.numberOfTapsRequired = 2
+
+        singleTapGestureRecognizer.require(toFail: doubleTapGestureRecognizer)
+
+        self.postsTableView.addGestureRecognizer(singleTapGestureRecognizer)
+        self.postsTableView.addGestureRecognizer(doubleTapGestureRecognizer)
+    }
+    
+    @objc
+    func tableViewTapped(_ sender: UITapGestureRecognizer) {
+        if let indexPath = self.postsTableView.indexPathForRow(at: sender.location(in: self.postsTableView)) {
+            self.lastSelectedPost = self.posts[indexPath.row]
+            self.performSegue(withIdentifier: Const.GO_TO_POST_DETAIL_SEGUE_ID, sender: nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -113,10 +132,10 @@ extension PostListViewController: UITableViewDelegate {
         self.stateManager.handle(action: .loadMore(num: Const.LOAD_MORE_POSTS_N, subreddit: Const.SUBREDDIT))
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.lastSelectedPost = self.posts[indexPath.row]
-        self.performSegue(withIdentifier: Const.GO_TO_POST_DETAIL_SEGUE_ID, sender: nil)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.lastSelectedPost = self.posts[indexPath.row]
+//        self.performSegue(withIdentifier: Const.GO_TO_POST_DETAIL_SEGUE_ID, sender: nil)
+//    }
     
 }
 
@@ -151,6 +170,17 @@ extension PostListViewController: PostViewDelegate {
         let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         present(ac, animated: true)
     }
+    
+    func imageViewTapped(post: Post) {
+        print("Post list: image single tapped")
+        self.lastSelectedPost = post
+        self.performSegue(withIdentifier: Const.GO_TO_POST_DETAIL_SEGUE_ID, sender: nil)
+    }
+    
+    func imageViewDoubleTapped(post: Post) {
+        print("Post list: image double tapped")
+    }
+    
 }
 
 //MARK: - UITextFieldDelegate

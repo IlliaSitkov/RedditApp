@@ -11,6 +11,13 @@ import SDWebImage
 protocol PostViewDelegate: AnyObject {
     func shareButtonClicked(url: URL)
     func saveButtonClicked(id: String, saved: Bool)
+    func imageViewTapped(post: Post)
+    func imageViewDoubleTapped(post: Post)
+}
+
+extension PostViewDelegate {
+    func imageViewTapped(post: Post) {}
+    func imageViewDoubleTapped(post: Post) {}
 }
 
 final class PostView: UIView {
@@ -26,9 +33,10 @@ final class PostView: UIView {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var bookmarkBtn: UIButton!
     @IBOutlet private weak var upvotesImg: UIImageView!
+    @IBOutlet private weak var saveView: UIView!
     
-    let bookmarkSet = UIImage(systemName: "bookmark.circle.fill") ?? UIImage(systemName: "bookmark.fill")
-    let bookmarkUnset = UIImage(systemName: "bookmark.circle") ?? UIImage(systemName: "bookmark")
+    private let bookmarkSet = UIImage(systemName: "bookmark.circle.fill") ?? UIImage(systemName: "bookmark.fill")
+    private let bookmarkUnset = UIImage(systemName: "bookmark.circle") ?? UIImage(systemName: "bookmark")
     
     private var post: Post?
     weak var delegate: PostViewDelegate?
@@ -48,6 +56,41 @@ final class PostView: UIView {
         contentView.fixInView(self)
         commentsBtn.setImage(UIImage(systemName: "plus.message"), for: .normal)
         upvotesImg.image = UIImage(systemName: "arrow.up.heart")
+        addGestureRecognizers()
+    }
+    
+    func addGestureRecognizers() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        tapGestureRecognizer.cancelsTouchesInView = true
+        
+        let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageViewDoubleTapped))
+        doubleTapGestureRecognizer.numberOfTapsRequired = 2
+        doubleTapGestureRecognizer.cancelsTouchesInView = true
+        
+        self.imageView.addGestureRecognizer(tapGestureRecognizer)
+        self.imageView.addGestureRecognizer(doubleTapGestureRecognizer)
+        
+        tapGestureRecognizer.require(toFail: doubleTapGestureRecognizer)
+    }
+    
+    @objc
+    func imageViewTapped(_ sender: UITapGestureRecognizer) {
+        print("Image tapped")
+        print("recognizer state: \(sender.state)")
+        guard let post = self.post,
+              let delegate = self.delegate
+        else {return}
+        delegate.imageViewTapped(post: post)
+    }
+    
+    @objc
+    func imageViewDoubleTapped(_ sender: UITapGestureRecognizer) {
+        print("Image double tapped")
+        guard let post = self.post,
+              let delegate = self.delegate
+        else {return}
+        delegate.imageViewDoubleTapped(post: post)
     }
     
     func resetDefaultImage() {
@@ -109,6 +152,53 @@ final class PostView: UIView {
             return "\(Int(oldTime)) h"
         }
         return "\(Int(newTime)) d"
+    }
+    
+    @objc
+    func drawBookmark() {
+        
+        let frame = self.imageView.frame
+        print(frame)
+        
+        //        print(frame.origin)
+        //        print(frame.height)
+        //        print(frame.width)
+        
+        let midX = frame.midX
+        let midY = frame.midY - frame.origin.y
+        print(midX)
+        print(midY)
+        
+        let height = 100.0
+        let width = 70.0
+        let triangleHeight = 30.0
+        
+        let path = UIBezierPath()
+        
+        
+        path.move(to: CGPoint(x: midX-width/2, y: midY-height/2))
+        print(path.currentPoint)
+        
+        path.addLine(to: CGPoint(x: midX+width/2, y: midY-height/2))
+        print(path.currentPoint)
+        
+        path.addLine(to: CGPoint(x: midX+width/2, y: midY+height/2))
+        
+        
+        path.addLine(to: CGPoint(x: midX, y: midY+height/2-triangleHeight))
+        path.addLine(to: CGPoint(x: midX-width/2, y: midY+height/2))
+        path.addLine(to: CGPoint(x: midX-width/2, y: midY-height/2))
+        path.close()
+        
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.fillColor = UIColor.red.cgColor
+        shapeLayer.strokeColor = UIColor.black.cgColor
+        
+        shapeLayer.lineWidth = 5
+        
+        self.saveView.layer.addSublayer(shapeLayer)
+        
     }
     
 }

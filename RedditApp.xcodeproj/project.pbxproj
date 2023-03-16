@@ -66,10 +66,10 @@
 		950C99E929A80AC00011D9FE /* services */ = {
 			isa = PBXGroup;
 			children = (
+				950C99F129A827EC0011D9FE /* JSONDecoderX.swift */,
 				950C99E529A7F7EF0011D9FE /* URLBuilder.swift */,
 				959716A229B0E18F00D8C39B /* DataLoader.swift */,
 				953C94DB29BB4A1300E55B14 /* PostLoader.swift */,
-				950C99F129A827EC0011D9FE /* JSONDecoderX.swift */,
 				953C94D729BB42B900E55B14 /* PostStore.swift */,
 				953C94D929BB46DD00E55B14 /* StateManager.swift */,
 			);

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,6 +17,7 @@
                 <outlet property="contentView" destination="1Va-DG-D7I" id="p6B-H1-kuO"/>
                 <outlet property="imageView" destination="jOa-b0-5qy" id="rCU-ob-61M"/>
                 <outlet property="likesLabel" destination="BYb-cH-Qdk" id="QqI-O3-Qgo"/>
+                <outlet property="saveView" destination="MZZ-ck-Q2S" id="90d-jd-Iek"/>
                 <outlet property="titleLabel" destination="UhU-Ua-HUc" id="A2O-Wq-1f5"/>
                 <outlet property="upvotesImg" destination="Cmk-3A-z1f" id="Di1-ky-kp2"/>
             </connections>
@@ -52,7 +54,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jOa-b0-5qy">
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jOa-b0-5qy">
                     <rect key="frame" x="0.0" y="86" width="312" height="197.5"/>
                     <color key="tintColor" systemColor="systemGray5Color"/>
                     <constraints>
@@ -99,18 +101,26 @@
                         </button>
                     </subviews>
                 </stackView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MZZ-ck-Q2S" userLabel="SaveView">
+                    <rect key="frame" x="0.0" y="85" width="312" height="200"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="FtH-fV-YGX"/>
             <color key="backgroundColor" systemColor="systemGray6Color"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="cPt-Tf-e1Y" secondAttribute="trailing" constant="8" id="0am-7R-JDB"/>
                 <constraint firstItem="UhU-Ua-HUc" firstAttribute="leading" secondItem="1Va-DG-D7I" secondAttribute="leading" constant="8" id="1Rf-yz-xjQ"/>
+                <constraint firstItem="MZZ-ck-Q2S" firstAttribute="leading" secondItem="jOa-b0-5qy" secondAttribute="leading" id="265-fz-2AF"/>
                 <constraint firstItem="cPt-Tf-e1Y" firstAttribute="top" secondItem="1Va-DG-D7I" secondAttribute="top" constant="8" id="4Lo-Yh-pgZ"/>
                 <constraint firstItem="cnE-Cx-A4S" firstAttribute="leading" secondItem="1Va-DG-D7I" secondAttribute="leading" constant="8" id="AIN-ak-piI"/>
                 <constraint firstItem="UhU-Ua-HUc" firstAttribute="top" secondItem="cPt-Tf-e1Y" secondAttribute="bottom" constant="8" id="AnI-ta-s1y"/>
                 <constraint firstAttribute="trailing" secondItem="cnE-Cx-A4S" secondAttribute="trailing" constant="8" id="EWZ-0C-oft"/>
+                <constraint firstItem="MZZ-ck-Q2S" firstAttribute="top" secondItem="jOa-b0-5qy" secondAttribute="top" id="Oiy-Fk-He9"/>
                 <constraint firstAttribute="bottom" secondItem="cnE-Cx-A4S" secondAttribute="bottom" constant="8" id="SbT-Ct-gV2"/>
                 <constraint firstItem="cPt-Tf-e1Y" firstAttribute="leading" secondItem="1Va-DG-D7I" secondAttribute="leading" constant="8" id="Taa-4z-evi"/>
+                <constraint firstItem="jOa-b0-5qy" firstAttribute="trailing" secondItem="MZZ-ck-Q2S" secondAttribute="trailing" id="Tfc-DD-Jpo"/>
+                <constraint firstItem="MZZ-ck-Q2S" firstAttribute="bottom" secondItem="jOa-b0-5qy" secondAttribute="bottom" id="l71-xf-QQ8"/>
                 <constraint firstItem="jOa-b0-5qy" firstAttribute="top" secondItem="UhU-Ua-HUc" secondAttribute="bottom" constant="8" id="mAv-k5-NI8"/>
                 <constraint firstItem="cnE-Cx-A4S" firstAttribute="top" secondItem="jOa-b0-5qy" secondAttribute="bottom" constant="8" id="mUi-B0-lvC"/>
                 <constraint firstAttribute="trailing" secondItem="UhU-Ua-HUc" secondAttribute="trailing" constant="8" id="mez-g5-UFJ"/>
@@ -127,9 +137,9 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow.up.circle" catalog="system" width="128" height="121"/>
-        <image name="bookmark" catalog="system" width="112" height="128"/>
-        <image name="message" catalog="system" width="128" height="113"/>
+        <image name="arrow.up.circle" catalog="system" width="128" height="123"/>
+        <image name="bookmark" catalog="system" width="110" height="128"/>
+        <image name="message" catalog="system" width="128" height="116"/>
         <image name="photo" catalog="system" width="128" height="93"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="systemGray5Color">

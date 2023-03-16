@@ -15,6 +15,7 @@ final class PostDetailsViewController: UIViewController {
     private let stateManager = StateManager.instance
     
     func config(with data: Post) {
+        _ = self.view
         self.postView.config(with: data)
         self.postView.delegate = self
     }
@@ -35,5 +36,9 @@ extension PostDetailsViewController: PostViewDelegate {
         } else {
             self.stateManager.handle(action: .unsavePost(id: id))
         }
+    }
+    
+    func imageViewDoubleTapped(post: Post) {
+        print("Post details: image double tapped")
     }
 }
