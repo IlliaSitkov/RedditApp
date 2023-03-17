@@ -132,11 +132,6 @@ extension PostListViewController: UITableViewDelegate {
         self.stateManager.handle(action: .loadMore(num: Const.LOAD_MORE_POSTS_N, subreddit: Const.SUBREDDIT))
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.lastSelectedPost = self.posts[indexPath.row]
-//        self.performSegue(withIdentifier: Const.GO_TO_POST_DETAIL_SEGUE_ID, sender: nil)
-//    }
-    
 }
 
 //MARK: - UITableViewDatasource
@@ -172,13 +167,13 @@ extension PostListViewController: PostViewDelegate {
     }
     
     func imageViewTapped(post: Post) {
-        print("Post list: image single tapped")
         self.lastSelectedPost = post
         self.performSegue(withIdentifier: Const.GO_TO_POST_DETAIL_SEGUE_ID, sender: nil)
     }
     
     func imageViewDoubleTapped(post: Post) {
         print("Post list: image double tapped")
+//        self.stateManager.handle(action: .savePost(id: post.id))
     }
     
 }

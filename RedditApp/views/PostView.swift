@@ -77,7 +77,6 @@ final class PostView: UIView {
     @objc
     func imageViewTapped(_ sender: UITapGestureRecognizer) {
         print("Image tapped")
-        print("recognizer state: \(sender.state)")
         guard let post = self.post,
               let delegate = self.delegate
         else {return}
@@ -87,9 +86,16 @@ final class PostView: UIView {
     @objc
     func imageViewDoubleTapped(_ sender: UITapGestureRecognizer) {
         print("Image double tapped")
+//        print("ATTACHED TO: \(sender.view?.description)")
+//        print("REAL VIEW: \(self.imageView.description)")
         guard let post = self.post,
               let delegate = self.delegate
         else {return}
+        print("SAVE VIEW: \(self.saveView.description)")
+        self.saveView.isHidden = false
+        drawBookmark()
+        // todo: update post.saved=true
+        self.bookmarkBtn.setImage(bookmarkSet, for: .normal)
         delegate.imageViewDoubleTapped(post: post)
     }
     
@@ -154,7 +160,6 @@ final class PostView: UIView {
         return "\(Int(newTime)) d"
     }
     
-    @objc
     func drawBookmark() {
         
         let frame = self.imageView.frame
@@ -175,7 +180,6 @@ final class PostView: UIView {
         
         let path = UIBezierPath()
         
-        
         path.move(to: CGPoint(x: midX-width/2, y: midY-height/2))
         print(path.currentPoint)
         
@@ -184,7 +188,6 @@ final class PostView: UIView {
         
         path.addLine(to: CGPoint(x: midX+width/2, y: midY+height/2))
         
-        
         path.addLine(to: CGPoint(x: midX, y: midY+height/2-triangleHeight))
         path.addLine(to: CGPoint(x: midX-width/2, y: midY+height/2))
         path.addLine(to: CGPoint(x: midX-width/2, y: midY-height/2))
@@ -192,13 +195,42 @@ final class PostView: UIView {
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
-        shapeLayer.fillColor = UIColor.red.cgColor
-        shapeLayer.strokeColor = UIColor.black.cgColor
+        shapeLayer.fillColor = UIColor.link.cgColor
+//        shapeLayer.strokeColor = UIColor.black.cgColor
         
-        shapeLayer.lineWidth = 5
+//        shapeLayer.lineWidth = 5
         
+        self.saveView.layer.sublayers?.forEach {$0.removeFromSuperlayer()}
         self.saveView.layer.addSublayer(shapeLayer)
         
+        let animation = CABasicAnimation(keyPath: "transform.scale")
+        animation.duration = 0.3
+        animation.fromValue = 0
+        animation.toValue = 1.1
+
+        let animation1 = CABasicAnimation(keyPath: "transform.scale")
+        animation1.duration = 0.2
+        animation1.fromValue = 1.1
+        animation1.toValue = 0
+        animation1.beginTime = 0.7
+
+        let group = CAAnimationGroup()
+        group.animations = [animation, animation1]
+        group.duration = 0.9
+        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+
+
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            self.saveView.isHidden = true
+            print("Animation group completed")
+        }
+        self.saveView.layer.add(group, forKey: "my_key")
+        CATransaction.commit()
+
+//        DispatchQueue.main.asyncAfter(deadline: .now()+0.85, execute: {
+//            self.saveView.isHidden = true
+//        })
     }
     
 }

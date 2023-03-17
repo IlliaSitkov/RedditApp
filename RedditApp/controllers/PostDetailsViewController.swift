@@ -40,5 +40,6 @@ extension PostDetailsViewController: PostViewDelegate {
     
     func imageViewDoubleTapped(post: Post) {
         print("Post details: image double tapped")
+        self.stateManager.handle(action: .savePost(id: post.id))
     }
 }
