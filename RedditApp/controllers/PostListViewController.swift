@@ -52,15 +52,18 @@ final class PostListViewController: UIViewController {
         self.stateManager.delegate = self
         self.subredditLabel.text = "/r/\(Const.SUBREDDIT)"
         self.textField.delegate = self
-        
+        addGestureRecognizers()
+    }
+    
+    private func addGestureRecognizers() {
         let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
         singleTapGestureRecognizer.numberOfTapsRequired = 1
-
+        
         let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: nil)
         doubleTapGestureRecognizer.numberOfTapsRequired = 2
-
+        
         singleTapGestureRecognizer.require(toFail: doubleTapGestureRecognizer)
-
+        
         self.postsTableView.addGestureRecognizer(singleTapGestureRecognizer)
         self.postsTableView.addGestureRecognizer(doubleTapGestureRecognizer)
     }
@@ -106,9 +109,20 @@ final class PostListViewController: UIViewController {
 //MARK: - PostManagerDelegate
 extension PostListViewController: StateManagerDelegate {
     
-    func stateUpdated() {
-        DispatchQueue.main.async {
-            self.postsTableView.reloadData()
+    func isVisible() -> Bool {
+        self.isViewLoaded && self.view.window != nil
+    }
+    
+    func stateUpdated(update: StateUpdate) {
+        switch update {
+        case .postsLoaded,
+                .postUnsaved where self.showSaved == true || !isVisible(),
+                .postSaved where !isVisible():
+            DispatchQueue.main.async {
+                self.postsTableView.reloadData()
+            }
+        default:
+            return
         }
     }
     
@@ -166,16 +180,6 @@ extension PostListViewController: PostViewDelegate {
         present(ac, animated: true)
     }
     
-    func imageViewTapped(post: Post) {
-        self.lastSelectedPost = post
-        self.performSegue(withIdentifier: Const.GO_TO_POST_DETAIL_SEGUE_ID, sender: nil)
-    }
-    
-    func imageViewDoubleTapped(post: Post) {
-        print("Post list: image double tapped")
-//        self.stateManager.handle(action: .savePost(id: post.id))
-    }
-    
 }
 
 //MARK: - UITextFieldDelegate
@@ -186,7 +190,6 @@ extension PostListViewController: UITextFieldDelegate {
         else {return true}
         let input = text.replacingCharacters(in: range, with: string)
         self.searchString = input
-        print("searchString='\(self.searchString)'")
         self.postsTableView.reloadData()
         return true
     }

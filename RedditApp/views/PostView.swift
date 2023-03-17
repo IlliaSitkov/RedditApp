@@ -11,13 +11,6 @@ import SDWebImage
 protocol PostViewDelegate: AnyObject {
     func shareButtonClicked(url: URL)
     func saveButtonClicked(id: String, saved: Bool)
-    func imageViewTapped(post: Post)
-    func imageViewDoubleTapped(post: Post)
-}
-
-extension PostViewDelegate {
-    func imageViewTapped(post: Post) {}
-    func imageViewDoubleTapped(post: Post) {}
 }
 
 final class PostView: UIView {
@@ -59,44 +52,25 @@ final class PostView: UIView {
         addGestureRecognizers()
     }
     
-    func addGestureRecognizers() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
-        tapGestureRecognizer.numberOfTapsRequired = 1
-        tapGestureRecognizer.cancelsTouchesInView = true
-        
+    private func addGestureRecognizers() {
         let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageViewDoubleTapped))
         doubleTapGestureRecognizer.numberOfTapsRequired = 2
-        doubleTapGestureRecognizer.cancelsTouchesInView = true
         
-        self.imageView.addGestureRecognizer(tapGestureRecognizer)
         self.imageView.addGestureRecognizer(doubleTapGestureRecognizer)
-        
-        tapGestureRecognizer.require(toFail: doubleTapGestureRecognizer)
-    }
-    
-    @objc
-    func imageViewTapped(_ sender: UITapGestureRecognizer) {
-        print("Image tapped")
-        guard let post = self.post,
-              let delegate = self.delegate
-        else {return}
-        delegate.imageViewTapped(post: post)
     }
     
     @objc
     func imageViewDoubleTapped(_ sender: UITapGestureRecognizer) {
-        print("Image double tapped")
-//        print("ATTACHED TO: \(sender.view?.description)")
-//        print("REAL VIEW: \(self.imageView.description)")
-        guard let post = self.post,
-              let delegate = self.delegate
-        else {return}
-        print("SAVE VIEW: \(self.saveView.description)")
+        animateBookmark()
+        if !(self.post?.saved ?? true) {
+            updatePost(saved: true)
+        }
+    }
+    
+    private func animateBookmark() {
         self.saveView.isHidden = false
         drawBookmark()
-        // todo: update post.saved=true
-        self.bookmarkBtn.setImage(bookmarkSet, for: .normal)
-        delegate.imageViewDoubleTapped(post: post)
+        performAnimation()
     }
     
     func resetDefaultImage() {
@@ -112,10 +86,13 @@ final class PostView: UIView {
     }
     
     @IBAction func saveButtonClicked() {
+        updatePost(saved: !(self.post?.saved ?? false))
+    }
+    
+    private func updatePost(saved: Bool) {
         guard let delegate = delegate,
               let post = self.post
         else {return}
-        let saved = !post.saved
         self.post?.saved = saved
         let image = saved ? self.bookmarkSet : self.bookmarkUnset
         self.bookmarkBtn.setImage(image, for: .normal)
@@ -160,19 +137,11 @@ final class PostView: UIView {
         return "\(Int(newTime)) d"
     }
     
-    func drawBookmark() {
-        
+    private func drawBookmark() {
         let frame = self.imageView.frame
-        print(frame)
-        
-        //        print(frame.origin)
-        //        print(frame.height)
-        //        print(frame.width)
         
         let midX = frame.midX
         let midY = frame.midY - frame.origin.y
-        print(midX)
-        print(midY)
         
         let height = 100.0
         let width = 70.0
@@ -181,13 +150,8 @@ final class PostView: UIView {
         let path = UIBezierPath()
         
         path.move(to: CGPoint(x: midX-width/2, y: midY-height/2))
-        print(path.currentPoint)
-        
         path.addLine(to: CGPoint(x: midX+width/2, y: midY-height/2))
-        print(path.currentPoint)
-        
         path.addLine(to: CGPoint(x: midX+width/2, y: midY+height/2))
-        
         path.addLine(to: CGPoint(x: midX, y: midY+height/2-triangleHeight))
         path.addLine(to: CGPoint(x: midX-width/2, y: midY+height/2))
         path.addLine(to: CGPoint(x: midX-width/2, y: midY-height/2))
@@ -196,41 +160,25 @@ final class PostView: UIView {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
         shapeLayer.fillColor = UIColor.link.cgColor
-//        shapeLayer.strokeColor = UIColor.black.cgColor
-        
-//        shapeLayer.lineWidth = 5
-        
+
         self.saveView.layer.sublayers?.forEach {$0.removeFromSuperlayer()}
         self.saveView.layer.addSublayer(shapeLayer)
-        
-        let animation = CABasicAnimation(keyPath: "transform.scale")
-        animation.duration = 0.3
-        animation.fromValue = 0
-        animation.toValue = 1.1
-
-        let animation1 = CABasicAnimation(keyPath: "transform.scale")
-        animation1.duration = 0.2
-        animation1.fromValue = 1.1
-        animation1.toValue = 0
-        animation1.beginTime = 0.7
-
-        let group = CAAnimationGroup()
-        group.animations = [animation, animation1]
-        group.duration = 0.9
-        group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-
-
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            self.saveView.isHidden = true
-            print("Animation group completed")
+    }
+    
+    private func performAnimation() {
+        self.saveView.transform = CGAffineTransform(scaleX: 0, y: 0)
+        UIView.animate(withDuration: 0.7,
+                       delay: 0,
+                       usingSpringWithDamping: 0.5,
+                       initialSpringVelocity: 2,
+                       animations: { [weak self] in
+            self?.saveView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }) { [weak self] (_) in
+            UIView.animate(withDuration: 0.3,
+                           animations: { [weak self] in
+                self?.saveView.transform = CGAffineTransform(scaleX: 0.000001, y: 0.000001)
+            })
         }
-        self.saveView.layer.add(group, forKey: "my_key")
-        CATransaction.commit()
-
-//        DispatchQueue.main.asyncAfter(deadline: .now()+0.85, execute: {
-//            self.saveView.isHidden = true
-//        })
     }
     
 }

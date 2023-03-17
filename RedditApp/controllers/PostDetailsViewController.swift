@@ -37,9 +37,4 @@ extension PostDetailsViewController: PostViewDelegate {
             self.stateManager.handle(action: .unsavePost(id: id))
         }
     }
-    
-    func imageViewDoubleTapped(post: Post) {
-        print("Post details: image double tapped")
-        self.stateManager.handle(action: .savePost(id: post.id))
-    }
 }

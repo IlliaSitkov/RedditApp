@@ -16,8 +16,12 @@ enum Action {
     case savePostsLocally
 }
 
+enum StateUpdate {
+    case postSaved, postUnsaved, postsLoaded
+}
+
 protocol StateManagerDelegate: AnyObject {
-    func stateUpdated()
+    func stateUpdated(update: StateUpdate)
 }
 
 final class StateManager {
@@ -73,19 +77,19 @@ final class StateManager {
         case let .initialLoad(num, subreddit):
             Task {
                 await performInitialLoad(num: num, subreddit: subreddit)
-                notifyDelegateStateUpdated()
+                notifyDelegateStateUpdated(update: .postsLoaded)
             }
         case let .loadMore(num, subreddit):
             Task {
                 await loadMorePosts(num: num, subreddit: subreddit)
-                notifyDelegateStateUpdated()
+                notifyDelegateStateUpdated(update: .postsLoaded)
             }
         case let .savePost(id):
             savePost(id: id)
-            notifyDelegateStateUpdated()
+            notifyDelegateStateUpdated(update: .postSaved)
         case let .unsavePost(id):
             unsavePost(id: id)
-            notifyDelegateStateUpdated()
+            notifyDelegateStateUpdated(update: .postUnsaved)
         case .savePostsLocally:
             saveSavedPostsToFile()
         }
@@ -141,9 +145,9 @@ final class StateManager {
         return updatedPosts
     }
     
-    private func notifyDelegateStateUpdated() {
+    private func notifyDelegateStateUpdated(update: StateUpdate) {
         if let delegate = self.delegate {
-            delegate.stateUpdated()
+            delegate.stateUpdated(update: update)
         }
     }
     
