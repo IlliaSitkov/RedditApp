@@ -32,7 +32,8 @@ final class StateManager {
     private(set) var loadingIsPossible = true {
         didSet {
             if !self.loadingIsPossible {
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else {return}
                     Timer.scheduledTimer(
                         timeInterval: Const.LOADING_IS_POSSIBLE_RESET_TIME_S,
                         target: self,

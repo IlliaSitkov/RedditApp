@@ -118,8 +118,8 @@ extension PostListViewController: StateManagerDelegate {
         case .postsLoaded,
                 .postUnsaved where self.showSaved == true || !isVisible(),
                 .postSaved where !isVisible():
-            DispatchQueue.main.async {
-                self.postsTableView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                self?.postsTableView.reloadData()
             }
         default:
             return
