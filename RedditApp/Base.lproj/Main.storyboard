@@ -12,13 +12,13 @@
         <!--Navigation Controller-->
         <scene sceneID="LmJ-sW-Jnh">
             <objects>
-                <navigationController toolbarHidden="NO" id="IYy-Cf-NWQ" sceneMemberID="viewController">
+                <navigationController id="IYy-Cf-NWQ" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YMV-aT-qYk">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="T5t-f8-1f0">
-                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>

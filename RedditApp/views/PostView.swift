@@ -138,10 +138,10 @@ final class PostView: UIView {
     }
     
     private func drawBookmark() {
-        let frame = self.imageView.frame
+        let bounds = self.imageView.bounds
         
-        let midX = frame.midX
-        let midY = frame.midY - frame.origin.y
+        let midX = bounds.midX
+        let midY = bounds.midY
         
         let height = 100.0
         let width = 70.0
