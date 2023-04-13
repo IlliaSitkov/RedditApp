@@ -83,8 +83,8 @@ struct CommentList: View {
             self.cellOpacity = Const.MIN_CELL_OPACITY
             DispatchQueue.main.asyncAfter(deadline: .now()+Const.ANIMATION_DURATION) {
                 self.cellOpacity = Const.MAX_OPACITY
+                handleTap(comment)
             }
-            handleTap(comment)
         }
     }
     
