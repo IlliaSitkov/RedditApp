@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IYy-Cf-NWQ">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -157,26 +156,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wR8-Aj-hnL" customClass="PostView" customModule="RedditApp" customModuleProvider="target">
-                                <rect key="frame" x="8" y="60" width="398" height="158"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="1" constant="158" id="xf0-jA-iGg"/>
-                                </constraints>
-                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="wnz-FO-1bU">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZpD-au-Ysl">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="393"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rcR-dI-oOa">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5sa-H8-T14" customClass="PostView" customModule="RedditApp" customModuleProvider="target">
+                                                        <rect key="frame" x="8" y="0.0" width="398" height="300"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="5sa-H8-T14" firstAttribute="top" secondItem="rcR-dI-oOa" secondAttribute="top" id="Hxg-v8-OOh"/>
+                                                    <constraint firstAttribute="height" priority="1" constant="300" id="enQ-fY-wcV"/>
+                                                    <constraint firstAttribute="bottom" secondItem="5sa-H8-T14" secondAttribute="bottom" id="eoW-FN-b7V"/>
+                                                    <constraint firstAttribute="trailing" secondItem="5sa-H8-T14" secondAttribute="trailing" constant="8" id="uUG-ou-Jom"/>
+                                                    <constraint firstItem="5sa-H8-T14" firstAttribute="leading" secondItem="rcR-dI-oOa" secondAttribute="leading" constant="8" id="yUC-UF-aJA"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="rcR-dI-oOa" firstAttribute="leading" secondItem="ZpD-au-Ysl" secondAttribute="leading" id="0D4-CF-DGk"/>
+                                            <constraint firstAttribute="trailing" secondItem="rcR-dI-oOa" secondAttribute="trailing" id="R5f-UU-sfs"/>
+                                            <constraint firstItem="rcR-dI-oOa" firstAttribute="top" secondItem="ZpD-au-Ysl" secondAttribute="top" id="egV-Sz-ygw"/>
+                                            <constraint firstAttribute="bottom" secondItem="rcR-dI-oOa" secondAttribute="bottom" id="fA7-ls-6jr"/>
+                                        </constraints>
+                                    </scrollView>
+                                    <view contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="44U-FT-zWm">
+                                        <rect key="frame" x="0.0" y="425" width="414" height="393"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="msi-d3-Z9S"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="msi-d3-Z9S" firstAttribute="trailing" secondItem="wR8-Aj-hnL" secondAttribute="trailing" constant="8" id="LDq-wE-WCM"/>
-                            <constraint firstItem="wR8-Aj-hnL" firstAttribute="leading" secondItem="msi-d3-Z9S" secondAttribute="leading" constant="8" id="Ve4-DR-9Tf"/>
-                            <constraint firstItem="wR8-Aj-hnL" firstAttribute="top" secondItem="msi-d3-Z9S" secondAttribute="top" constant="16" id="cGU-VK-0rZ"/>
+                            <constraint firstItem="wnz-FO-1bU" firstAttribute="bottom" secondItem="msi-d3-Z9S" secondAttribute="bottom" id="QjB-N2-2jA"/>
+                            <constraint firstItem="wnz-FO-1bU" firstAttribute="leading" secondItem="msi-d3-Z9S" secondAttribute="leading" id="TWa-j9-Mlw"/>
+                            <constraint firstItem="rcR-dI-oOa" firstAttribute="width" secondItem="msi-d3-Z9S" secondAttribute="width" id="n1Q-Cq-bZN"/>
+                            <constraint firstAttribute="trailing" secondItem="wnz-FO-1bU" secondAttribute="trailing" id="sTc-dB-PHf"/>
+                            <constraint firstItem="wnz-FO-1bU" firstAttribute="top" secondItem="msi-d3-Z9S" secondAttribute="top" id="zoI-gl-War"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xgY-cM-GGw"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="postView" destination="wR8-Aj-hnL" id="2HC-YB-lEh"/>
+                        <outlet property="containerView" destination="44U-FT-zWm" id="FQT-gu-OMg"/>
+                        <outlet property="postView" destination="5sa-H8-T14" id="8No-tY-xbc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pgw-U9-q17" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -188,6 +220,9 @@
         <image name="bookmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

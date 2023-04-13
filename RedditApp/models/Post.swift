@@ -28,10 +28,13 @@ struct Post: Codable {
     let numComments: Int
     let ups: Int
     let downs: Int
-    let created: Int
+    let created: Double
     var saved: Bool
     let name: String
     let url: String
+    var createdAgo: String {
+        Date.convert(time: Date().timeIntervalSince1970 - self.created)
+    }
     
     enum CodingKeys: String, CodingKey {
         case domain,title,ups,downs, numComments,preview,created,name,url,id,saved

@@ -102,7 +102,7 @@ final class PostView: UIView {
     func config(with post: Post) {
         self.post = post
         self.titleLabel.text = post.title
-        let time = self.convert(time: Date().timeIntervalSince1970 - Double(post.created))
+        let time = post.createdAgo
         let domain = post.domain
         self.authorLabel.text = "\(post.username) • \(time) • \(domain)"
         self.likesLabel.text = String(post.ups - post.downs)
@@ -116,25 +116,6 @@ final class PostView: UIView {
             self.imageView.sd_setImage(with: URL(string:imageUrl.replacingOccurrences(of: "amp;", with: "")), placeholderImage: nil)
         }
         self.bookmarkBtn.setImage(post.saved ? self.bookmarkSet : self.bookmarkUnset, for: .normal)
-    }
-    
-    func convert(time: Double) -> String {
-        var oldTime = time
-        var newTime = time / 60.0
-        if (newTime < 1) {
-            return "\(Int(oldTime)) s"
-        }
-        oldTime = newTime
-        newTime = oldTime / 60.0
-        if (newTime < 1) {
-            return "\(Int(oldTime)) m"
-        }
-        oldTime = newTime
-        newTime = oldTime / 24.0
-        if (newTime < 1) {
-            return "\(Int(oldTime)) h"
-        }
-        return "\(Int(newTime)) d"
     }
     
     private func drawBookmark() {
@@ -193,5 +174,31 @@ extension UIView
         NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
         NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+    }
+}
+
+extension Date {
+    static func convert(time: Double) -> String {
+        var oldTime = time
+        var newTime = time / 60.0
+        if (newTime < 1) {
+            return "\(Int(oldTime)) s"
+        }
+        oldTime = newTime
+        newTime = oldTime / 60.0
+        if (newTime < 1) {
+            return "\(Int(oldTime)) m"
+        }
+        oldTime = newTime
+        newTime = oldTime / 24.0
+        if (newTime < 1) {
+            return "\(Int(oldTime)) h"
+        }
+        oldTime = newTime
+        newTime = oldTime / 30.0
+        if (newTime < 1) {
+            return "\(Int(oldTime)) d"
+        }
+        return "\(Int(newTime)) m"
     }
 }

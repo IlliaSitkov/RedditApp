@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B9EA48229E7371B0036ED85 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9EA48129E7371B0036ED85 /* Comment.swift */; };
+		5B9EA48429E7380A0036ED85 /* CommentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9EA48329E7380A0036ED85 /* CommentList.swift */; };
+		5B9EA48629E738460036ED85 /* CommentLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9EA48529E738460036ED85 /* CommentLoader.swift */; };
+		5B9EA48A29E738E70036ED85 /* CommentDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9EA48929E738E70036ED85 /* CommentDetail.swift */; };
 		950C99E629A7F7EF0011D9FE /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950C99E529A7F7EF0011D9FE /* URLBuilder.swift */; };
 		950C99EE29A80C3B0011D9FE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950C99ED29A80C3B0011D9FE /* Post.swift */; };
 		950C99F229A827EC0011D9FE /* JSONDecoderX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950C99F129A827EC0011D9FE /* JSONDecoderX.swift */; };
@@ -29,6 +33,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B9EA48129E7371B0036ED85 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		5B9EA48329E7380A0036ED85 /* CommentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentList.swift; sourceTree = "<group>"; };
+		5B9EA48529E738460036ED85 /* CommentLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLoader.swift; sourceTree = "<group>"; };
+		5B9EA48929E738E70036ED85 /* CommentDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDetail.swift; sourceTree = "<group>"; };
 		950C99E529A7F7EF0011D9FE /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
 		950C99ED29A80C3B0011D9FE /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		950C99F129A827EC0011D9FE /* JSONDecoderX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderX.swift; sourceTree = "<group>"; };
@@ -72,6 +80,7 @@
 				953C94DB29BB4A1300E55B14 /* PostLoader.swift */,
 				953C94D729BB42B900E55B14 /* PostStore.swift */,
 				953C94D929BB46DD00E55B14 /* StateManager.swift */,
+				5B9EA48529E738460036ED85 /* CommentLoader.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -80,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				950C99ED29A80C3B0011D9FE /* Post.swift */,
+				5B9EA48129E7371B0036ED85 /* Comment.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -123,6 +133,8 @@
 			children = (
 				95B8FDCE29AFBF70005B7735 /* PostView.swift */,
 				95C742ED29AFD97B00D10D82 /* PostCell.swift */,
+				5B9EA48329E7380A0036ED85 /* CommentList.swift */,
+				5B9EA48929E738E70036ED85 /* CommentDetail.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -226,16 +238,20 @@
 				959716A329B0E18F00D8C39B /* DataLoader.swift in Sources */,
 				950C99E629A7F7EF0011D9FE /* URLBuilder.swift in Sources */,
 				953C94DA29BB46DD00E55B14 /* StateManager.swift in Sources */,
+				5B9EA48229E7371B0036ED85 /* Comment.swift in Sources */,
 				95B8FDCF29AFBF70005B7735 /* PostView.swift in Sources */,
 				950C99EE29A80C3B0011D9FE /* Post.swift in Sources */,
 				950C99F229A827EC0011D9FE /* JSONDecoderX.swift in Sources */,
 				95C742EE29AFD97B00D10D82 /* PostCell.swift in Sources */,
+				5B9EA48629E738460036ED85 /* CommentLoader.swift in Sources */,
 				95C742F029AFDDD800D10D82 /* PostListViewController.swift in Sources */,
 				953C94DC29BB4A1300E55B14 /* PostLoader.swift in Sources */,
 				953C94D829BB42B900E55B14 /* PostStore.swift in Sources */,
 				959716A529B10B0A00D8C39B /* PostDetailsViewController.swift in Sources */,
 				958D809029A749F200241DFB /* AppDelegate.swift in Sources */,
 				958D809229A749F200241DFB /* SceneDelegate.swift in Sources */,
+				5B9EA48A29E738E70036ED85 /* CommentDetail.swift in Sources */,
+				5B9EA48429E7380A0036ED85 /* CommentList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +406,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -418,6 +435,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
