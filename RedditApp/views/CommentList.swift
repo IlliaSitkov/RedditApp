@@ -43,7 +43,6 @@ struct CommentList: View {
                     ForEach(commentLoader.comments) { comment in
                         self.commentCell(comment: comment)
                     }
-                    .navigationTitle("Comments")
                 }
             }
         }
