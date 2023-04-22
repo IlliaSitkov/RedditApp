@@ -20,11 +20,11 @@ struct Const {
 
 final class PostListViewController: UIViewController {
     
-    @IBOutlet weak var postsTableView: UITableView!
-    @IBOutlet weak var subredditLabel: UILabel!
-    @IBOutlet weak var showSavedButton: UIButton!
-    @IBOutlet weak var textView: UIView!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet private weak var postsTableView: UITableView!
+    @IBOutlet private weak var subredditLabel: UILabel!
+    @IBOutlet private weak var showSavedButton: UIButton!
+    @IBOutlet private weak var textView: UIView!
+    @IBOutlet private weak var textField: UITextField!
     
     private let stateManager = StateManager.instance
     
