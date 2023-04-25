@@ -11,6 +11,11 @@ import SDWebImage
 protocol PostViewDelegate: AnyObject {
     func shareButtonClicked(url: URL)
     func saveButtonClicked(id: String, saved: Bool)
+    func commentsButtonClicked(post: Post)
+}
+
+extension PostViewDelegate {
+    func commentsButtonClicked(post: Post) {}
 }
 
 final class PostView: UIView {
@@ -87,6 +92,12 @@ final class PostView: UIView {
     
     @IBAction func saveButtonClicked() {
         updatePost(saved: !(self.post?.saved ?? false))
+    }
+    
+    @IBAction func commentsButtonCLicked() {
+        if let delegate = self.delegate, let post = self.post {
+            delegate.commentsButtonClicked(post: post)
+        }
     }
     
     private func updatePost(saved: Bool) {

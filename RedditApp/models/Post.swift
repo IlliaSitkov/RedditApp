@@ -38,7 +38,7 @@ struct Post: Codable {
     
     enum CodingKeys: String, CodingKey {
         case domain,title,ups,downs, numComments,preview,created,name,url,id,saved
-        case username = "authorFullname"
+        case username = "author"
     }
 }
 struct PreviewImages: Codable {

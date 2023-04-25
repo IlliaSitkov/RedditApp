@@ -86,6 +86,9 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="15"/>
                                 <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="commentsButtonCLicked" destination="-1" eventType="touchUpInside" id="rPt-mV-V62"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u2X-cZ-jT0">
                             <rect key="frame" x="448.5" y="0.0" width="81.5" height="28"/>

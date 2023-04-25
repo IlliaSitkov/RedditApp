@@ -39,9 +39,8 @@ final class PostListViewController: UIViewController {
     private var posts: [Post] {
         if self.showSaved {
             let posts = self.stateManager.savedPosts
-            return self.searchString.count > 0 ?
+            return self.searchString.isEmpty ? posts:
             posts.filter {$0.title.lowercased().contains(searchString.lowercased())}
-            : posts
         } else {
             return self.stateManager.loadedPosts
         }
@@ -71,9 +70,13 @@ final class PostListViewController: UIViewController {
     @objc
     func tableViewTapped(_ sender: UITapGestureRecognizer) {
         if let indexPath = self.postsTableView.indexPathForRow(at: sender.location(in: self.postsTableView)) {
-            self.lastSelectedPost = self.posts[indexPath.row]
-            self.performSegue(withIdentifier: Const.GO_TO_POST_DETAIL_SEGUE_ID, sender: nil)
+            self.showPostDetails(post: self.posts[indexPath.row])
         }
+    }
+    
+    private func showPostDetails(post: Post) {
+        self.lastSelectedPost = post
+        self.performSegue(withIdentifier: Const.GO_TO_POST_DETAIL_SEGUE_ID, sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -167,6 +170,11 @@ extension PostListViewController: UITableViewDataSource {
 
 //MARK: - PostViewDelegate
 extension PostListViewController: PostViewDelegate {
+    
+    func commentsButtonClicked(post: Post) {
+        showPostDetails(post: post)
+    }
+    
     func saveButtonClicked(id: String, saved: Bool) {
         if saved {
             self.stateManager.handle(action: .savePost(id: id))

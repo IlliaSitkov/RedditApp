@@ -12,7 +12,12 @@ extension JSONDecoder {
     
     func parseJSON<T:Decodable>(_ to: T.Type, from data: Data) -> T? {
         self.keyDecodingStrategy = .convertFromSnakeCase
-        return try? self.decode(to, from: data)
+        do {
+            return try self.decode(to, from: data)
+        } catch {
+            print(error)
+            return nil
+        }
     }
     
 }

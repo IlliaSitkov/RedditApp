@@ -26,10 +26,9 @@ struct CommentList: View {
         self.handleTap = handleTap
     }
     
-    @StateObject var commentLoader = CommentLoader()
-    @ScaledMetric(relativeTo: .body) var padding = 6
+    @StateObject private var commentLoader = CommentLoader()
     @State private var selectedCommentId: String?
-    @State private var cellOpacity = 1.0
+    @State private var cellOpacity = Const.MAX_OPACITY
     
     var body: some View {
         VStack {
